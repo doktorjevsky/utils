@@ -78,7 +78,7 @@ Assumes: the queue has been instantiated
 Removes all items in the queue and returns them as a slice in the order they were placed in the queue
 */
 func (q *FifoQueue[T]) DequeueAll() []T {
-	out := make([]T, len(q.contents))
+	out := make([]T, 0)
 	for _, val := range q.contents {
 		out = append(out, val)
 	}
@@ -130,7 +130,7 @@ Assumes: the queue has been instantiated
 Returns the queue as a slice
 */
 func (q FifoQueue[T]) ToSlice() []T {
-	out := make([]T, q.Size())
+	out := make([]T, 0)
 	for _, val := range q.contents {
 		out = append(out, val)
 	}
