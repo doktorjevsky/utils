@@ -43,6 +43,7 @@ func (m *MapWrapper[K, V]) Put(key K, value V) {
 
 /*
  O(1)
+ Assumes: MapWrapper m has been instantiated
  Returns the value that is associated with the supplied key
  If there is no mapping, the function will return the nil value of the value type
 */
@@ -52,6 +53,7 @@ func (m MapWrapper[K, V]) Get(key K) V {
 
 /*
  O(1)
+ Assumes: MapWrapper m has been instantiated
  Removes the mapping with the supplied key
  No-op if such a mapping doesn't exist
 */
@@ -61,6 +63,7 @@ func (m *MapWrapper[K, V]) Remove(key K) {
 
 /*
  O(n)
+ Assumes: MapWrapper m has been instantiated
  Returns the MapWrappers keys as a slice
 */
 func (m MapWrapper[K, V]) Keys() []K {
@@ -73,6 +76,7 @@ func (m MapWrapper[K, V]) Keys() []K {
 
 /*
  O(n)
+ Assumes: MapWrapper m has been instantiated
  Returns the MapWrappers values as a slice
 */
 func (m MapWrapper[K, V]) Values() []V {
@@ -85,6 +89,7 @@ func (m MapWrapper[K, V]) Values() []V {
 
 /*
  O(1)
+ Assumes: MapWrapper m has been instantiated
  Returns true if there exist a mapping with the supplied key
 */
 func (m MapWrapper[K, V]) ContainsKey(key K) bool {
@@ -94,6 +99,7 @@ func (m MapWrapper[K, V]) ContainsKey(key K) bool {
 
 /*
  O(1)
+ Assumes: MapWrapper m has been instantiated
  If there exists a mapping with the supplied key, the new value will be mergeOp(newVal, oldVal)
  If not, it works as a regular Put
 */
@@ -106,6 +112,7 @@ func (m *MapWrapper[K, V]) Merge(key K, newVal V, mergeOp func(V, V) V) {
 }
 
 /*
+ Assumes: MapWrapper m has been instantiated
  Returns the number of mappings
 */
 func (m MapWrapper[K, V]) Size() int {
