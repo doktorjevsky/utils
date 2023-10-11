@@ -29,7 +29,11 @@ func NewPriorityQueue[T interface{}](comp func(T, T) int) *PriorityQueue[T] {
 		contents:   make([]T, 0)}
 }
 
-// parent of i at (i-1) / 2
+/*
+O(log n)
+Assumes: PriorityQueue has been initiated
+Inserts the item into a binary heap
+*/
 func (q *PriorityQueue[T]) Enqueue(item T) {
 	pos := len(q.contents)
 	q.contents = append(q.contents, item)
@@ -49,10 +53,22 @@ func (q *PriorityQueue[T]) Enqueue(item T) {
 	}
 }
 
-func getParentIndex(i int) int {
-	return (i - 1) / 2
+/*
+O(n log n)
+Assumes: the priority queue has bee instantiated
+Enqueues all items
+*/
+func (q *PriorityQueue[T]) EnqueueAll(items []T) {
+	for _, item := range items {
+		q.Enqueue(item)
+	}
 }
 
+/*
+O(log n)
+Assumes: the priority queue has been instantiated
+Removes the top element and restores the heap invariant
+*/
 func (q *PriorityQueue[T]) Dequeue() (T, error) {
 	var nilVal T
 	if len(q.contents) == 0 {
@@ -78,6 +94,74 @@ func (q *PriorityQueue[T]) Dequeue() (T, error) {
 	}
 	return item, nil
 }
+
+/*
+O(n log n)
+Assumes: priority queue has been instantiated
+Dequeues all items and returns them as a slice. The items will be sorted by the ordering given by pq.comparator
+*/
+func (q *PriorityQueue[T]) DequeueAll() []T {
+	out := make([]T, 0)
+	for len(q.contents) > 0 {
+		item, _ := q.Dequeue()
+		out = append(out, item)
+	}
+	return out
+}
+
+/*
+O(1)
+Assumes: the priority queue has been instantiated
+Returns the top element without removing it from the queue
+*/
+func (q PriorityQueue[T]) Peek() (T, error) {
+	var nilVal T
+	if len(q.contents) == 0 {
+		return nilVal, errors.New(peekErrorMsg)
+	}
+	return q.contents[0], nil
+}
+
+/*
+O(1)
+Assumes: the priority queue has been instantiated
+Returns true if the queue is empty
+*/
+func (q PriorityQueue[T]) IsEmpty() bool {
+	return len(q.contents) == 0
+}
+
+/*
+O(1)
+Wipes contents of the queue
+*/
+func (q *PriorityQueue[T]) Clear() {
+	q.contents = make([]T, 0)
+}
+
+/*
+O(n)
+Assumes: the priority queue has been instantiated
+Returns the inner representation of the queue as a slice
+*/
+func (q PriorityQueue[T]) ToSlice() []T {
+	out := make([]T, 0)
+	for _, val := range q.contents {
+		out = append(out, val)
+	}
+	return out
+}
+
+/*
+O(1)
+Assumes: the priority queue has been instantiated
+Returns the number of items in the queue
+*/
+func (q PriorityQueue[T]) Size() int {
+	return len(q.contents)
+}
+
+// PRIVATE HELPER FUNCTIONS BELOW
 
 // index or -1 if no swap
 func (q *PriorityQueue[T]) getChildSwapIndex(parentIndex int) int {
@@ -118,4 +202,8 @@ func getLeftChild(i int) int {
 
 func getRightChild(i int) int {
 	return 2*i + 2
+}
+
+func getParentIndex(i int) int {
+	return (i - 1) / 2
 }
