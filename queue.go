@@ -121,7 +121,7 @@ func (q FifoQueue[T]) Size() int {
 /*
 Replaces the internal queue with an empty queue
 */
-func (q FifoQueue[T]) Clear() {
+func (q *FifoQueue[T]) Clear() {
 	q.contents = make([]T, 0)
 }
 
