@@ -2,3 +2,5 @@ Some data structures:
 Stack
 Map
 Queue (Fifo, Priority)
+
+Import them to your go project with "github.com/doktorjevsky/utils/utils"
