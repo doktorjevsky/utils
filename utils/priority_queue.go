@@ -4,20 +4,6 @@ import (
 	"errors"
 )
 
-/*
-type Queue[T interface{}] interface {
-	Enqueue(item T)
-	EnqueueAll(item []T)
-	Dequeue() (T, error)
-	DequeueAll() []T
-	Peek() (T, error)
-	IsEmpty() bool
-	Size() int
-	Clear()
-	ToSlice() []T
-}
-*/
-
 type PriorityQueue[T interface{}] struct {
 	comparator func(T, T) int
 	contents   []T
