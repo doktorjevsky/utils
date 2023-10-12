@@ -1,3 +1,3 @@
-module github.com/doktorjevsky/utils/utils
+module utils
 
 go 1.21.2
