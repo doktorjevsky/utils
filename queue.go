@@ -31,8 +31,8 @@ type FifoQueue[T interface{}] struct {
 O(1)
 Instantiates a new FifoQueue
 */
-func NewFifoQueue[T interface{}]() FifoQueue[T] {
-	return FifoQueue[T]{contents: make([]T, 0)}
+func NewFifoQueue[T interface{}]() *FifoQueue[T] {
+	return &FifoQueue[T]{contents: make([]T, 0)}
 }
 
 /*
