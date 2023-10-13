@@ -68,7 +68,7 @@ func (s HashSet[T]) Size() int {
 
 func (s HashSet[T]) ToSlice() []T {
 	out := make([]T, 0)
-	for k, _ := range s.items {
+	for k := range s.items {
 		out = append(out, k)
 	}
 	return out
