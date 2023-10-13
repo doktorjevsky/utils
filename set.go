@@ -5,6 +5,7 @@ type Set[T comparable] interface {
 	AddAll(item []T)
 	Remove(item T) bool
 	RemoveAll(item []T)
+	Contains(item T) bool
 	Clear()
 	Size() int
 	ToSlice() []T
@@ -76,4 +77,8 @@ func (s HashSet[T]) ToSlice() []T {
 		out = append(out, k)
 	}
 	return out
+}
+
+func (s HashSet[T]) Contains(item T) bool {
+	return s.items[item]
 }
