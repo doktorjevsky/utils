@@ -14,6 +14,10 @@ type HashSet[T comparable] struct {
 	items map[T]bool
 }
 
+func NewHashSet[T comparable]() *HashSet[T] {
+	return &HashSet[T]{items: make(map[T]bool)}
+}
+
 /*
 O(1)
 Adds item to the set. Returns true if the item wasn't there before
